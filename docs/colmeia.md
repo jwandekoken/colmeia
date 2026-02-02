@@ -24,11 +24,11 @@ The platform operates on three hierarchical access layers:
 - **Function:** Receive "Daily Missions" and execute them. This is the focus of the CRM.
 - **Interface:** Same shared Web Frontend (PWA mode) to avoid friction of app store installation.
 
-### Level 3: The "Infantry" (The WhatsApp Bot - AI)
+### Level 3: The "Infantry" (Configurable Destination)
 
 - **User:** Regular voter / Broad base.
-- **Function:** Answer questions, consume passive content, and be recruited to become a "Captain."
-- **Interface:** WhatsApp (via Official API).
+- **Function:** Arrive at a configured destination (form, landing page, WhatsApp, call link, etc.) and be recruited to become a "Captain."
+- **Interface:** Configurable link destination (not hard-coded).
 
 ---
 
@@ -52,11 +52,12 @@ The platform operates on three hierarchical access layers:
 - Real-time ranking (State / Municipal / Neighborhood).
 - Symbolic and access rewards (e.g., "Lunch with the Candidate," "Thank You Video").
 
-### D. AI-powered Recruitment Funnel
+### D. Forms Page (Core Feature)
 
-- Voter clicks on Captain's link -> Lands on Official WhatsApp.
-- The AI (trained on the government plan) nurtures the voter.
-- **Upsell:** The AI invites the engaged voter to become a "Captain," closing the viral loop.
+- Voter clicks on Captain's link -> Lands on a **configurable Forms Page**.
+- The form captures structured feedback, interest signals, and contact data.
+- **Templates:** Predefined formats aligned to the campaign domain (e.g., Issue Feedback, Event RSVP, Volunteer Signup, Support Pledge).
+- **Upsell:** The form can invite the engaged voter to become a "Captain," closing the viral loop.
 
 ### E. Media Flow and Sharing (Zero Friction)
 
@@ -125,13 +126,10 @@ This flow connects video sharing to the recruitment of new volunteers via WhatsA
     - The request hits our server (Edge Middleware).
     - The system validates the legitimacy of the click (Anti-Fraud).
     - If valid: Computes +50 points for `capitao-joao`.
-3.  **The Redirection (Contextual Deep Link):**
-    - The server redirects the user to the WhatsApp API (`wa.me`).
-    - **Payload:** We inject a predefined message with a tracking parameter.
-    - _Final URL:_ `wa.me/BOT_NUMBER?text=I saw the Health video and want to know more. (ref:capitao-joao)`
-    - **The Closing (Bot):**
-    - The voter sends the message.
-    - The Bot (AI) reads the `ref` parameter and links this new voter to Captain João's wallet in the CRM.
+3.  **The Redirection (Configurable Destination):**
+    - The server redirects the user to a configured destination (Forms Page, landing page, WhatsApp, call link, etc.).
+    - **Payload:** We inject tracking parameters (e.g., `ref=capitao-joao`) to preserve attribution.
+    - _Example URL:_ `forms.vote.vc/u/capitao-joao?ref=capitao-joao`
 
 ### H. Contextual Landing Pages (The Strategic "Intermediate")
 
@@ -150,8 +148,8 @@ To transform the click into **Structured Intelligence** even before the conversa
     - **Text Area (Qualitative):** Space for the voter to type a specific suggestion or complaint.
     - **Identification Inputs:** Name and WhatsApp (Optional pre-fill).
   - _Decision UX (Dual Choice):_
-    - **Primary Button ("Send and Chat"):** Saves data to the database and opens WhatsApp.
-    - **Secondary Button ("Skip and Go Directly to WhatsApp"):** Ignores the form and opens WhatsApp with only basic tracking.
+    - **Primary Button ("Send and Continue"):** Saves data to the database and redirects to the configured destination.
+    - **Secondary Button ("Skip and Continue"):** Ignores the form and redirects with only basic tracking.
 
 - **Mode C: Mobilization (Single Action)**
   - _Interface:_ Giant "Confirm Presence" or "Sign Support" button.
@@ -166,12 +164,11 @@ The magic happens in the handoff from the Web Page to the Bot:
     - The system saves the suggestion in the database.
     - The system generates a Context ID (`ctx_123`).
 3.  **Smart Redirection:**
-    - The Backend returns the WhatsApp URL with the context injected:
-    - `wa.me/BOT?text=Hello, I just sent my suggestion. (ref:ctx_123)`
-4.  **AI Welcome:**
-    - The Bot receives the message and extracts `ctx_123`.
-    - It queries the database, sees that the theme is **Health**.
-    - **Personalized Response:** Instead of "Hello, type 1 for Health," the Bot responds: _"Thanks for the suggestion about the X Neighborhood clinic! Did you know our Health proposal includes..."_
+    - The Backend returns the configured destination URL with the context injected:
+    - `forms.vote.vc/u/capitao-joao?ref=ctx_123`
+4.  **Optional AI Layer (Future Add-on):**
+    - An AI bot can be added later as an extra offering to handle chat flows.
+    - It can read the `ctx_123` parameter and personalize the first response.
 
 ---
 
