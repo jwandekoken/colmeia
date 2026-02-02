@@ -5,7 +5,7 @@ This document outlines the architectural and technological choices for the platf
 ## 1. Core Runtime & Package Management
 
 - **Runtime:** Node.js (LTS)
-- **Package Manager:** npm with **Workspaces** (Monorepo)
+- **Package Manager:** pnpm with **Workspaces** (Monorepo)
 - **Language:** TypeScript (Strict Mode)
 
 ## 2. Backend (The "General")
@@ -16,13 +16,14 @@ This document outlines the architectural and technological choices for the platf
 - **ORM:** [Drizzle ORM](https://orm.drizzle.team/) (Best-in-class for D1/Edge runtimes)
 - **Authentication:** [Lucia Auth](https://lucia-auth.com/) or Cloudflare Turnstile/JWT (TBD)
 
-## 3. Frontend (The "Captains")
+## 3. Frontend (Shared for "Generals" and "Captains")
 
 - **Library:** React
 - **Build Tool:** Vite
 - **Architecture:** SPA (Single Page Application)
 - **Type Safety:** **Hono RPC** (End-to-end type safety between Backend and Frontend)
 - **UI/Styling:** Tailwind CSS + [Shadcn/ui](https://ui.shadcn.com/) (Recommended for rapid development)
+  - **Audience:** Same frontend serves both the General dashboard and the Captain PWA.
 
 ## 4. Storage & Media
 
@@ -50,6 +51,6 @@ This document outlines the architectural and technological choices for the platf
 
 - **Wrangler:** Used for local simulation of Workers and D1.
 - **Commands:**
-  - `npm install` - To install dependencies for all packages.
-  - `npm run dev --workspace=api` - Start the backend local server.
-  - `npm run dev --workspace=web` - Start the frontend local server.
+  - `pnpm install` - To install dependencies for all packages.
+  - `pnpm run dev --workspace=api` - Start the backend local server.
+  - `pnpm run dev --workspace=web` - Start the frontend local server.

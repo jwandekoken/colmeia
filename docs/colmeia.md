@@ -16,13 +16,13 @@ The platform operates on three hierarchical access layers:
 
 - **User:** Marketing Team / Campaign Coordination.
 - **Function:** Central intelligence. Creates narratives, defines goals ("Missions"), monitors KPIs, and engagement heatmaps.
-- **Interface:** Desktop Dashboard (React/Next.js).
+- **Interface:** Shared Web Frontend (Dashboard + PWA mode).
 
 ### Level 2: The "Captains" (The Leader's App - PWA/Mobile)
 
 - **User:** Neighborhood leaders, campaign workers, and engaged volunteers.
 - **Function:** Receive "Daily Missions" and execute them. This is the focus of the CRM.
-- **Interface:** PWA (Progressive Web App) to avoid friction of app store installation.
+- **Interface:** Same shared Web Frontend (PWA mode) to avoid friction of app store installation.
 
 ### Level 3: The "Infantry" (The WhatsApp Bot - AI)
 
