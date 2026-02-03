@@ -39,10 +39,12 @@ This document outlines the architectural and technological choices for the platf
 
 ```text
 /
-├── packages/
+├── apps/
 │   ├── api/          # Hono + D1 + Drizzle (Cloudflare Workers)
-│   ├── web/          # React + Vite (Frontend)
-│   └── shared/       # Zod schemas and shared TypeScript types
+│   └── web/          # React + Vite (Frontend)
+├── packages/
+│   ├── shared/       # Zod schemas and shared TypeScript types
+│   └── config/       # Shared TS/ESLint/Prettier configs (optional)
 ├── package.json      # Workspace configuration
 └── README.md
 ```
