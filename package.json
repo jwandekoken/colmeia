@@ -3,6 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "pnpm -r run dev",
+    "dev:api": "pnpm --filter @colmeia/api dev",
+    "dev:web": "pnpm --filter @colmeia/web dev",
+    "dev:all": "pnpm -r --parallel run dev",
     "lint": "pnpm -r run lint",
     "typecheck": "pnpm -r run typecheck"
   }
