@@ -51,6 +51,14 @@ The API exports its type for the React frontend:
 
 This enables end-to-end type safety for requests and responses.
 
+## Memory & Lifecycle
+
+Dependencies stored in `c.var` are per-request and short-lived. Once the request completes, the context and its dependencies are eligible for garbage collection. This is safe and idiomatic in Hono/Workers as long as:
+
+- `deps` only contains lightweight objects (service/repo instances, config, adapters).
+- Large payloads (files/media) are streamed and not stored in `c.var`.
+- Long-lived caches or heavy resources are not stored in module-level globals unless explicitly bounded.
+
 ## Suggested Module Set (MVP)
 
 - `missions`
