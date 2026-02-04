@@ -21,19 +21,18 @@ This document defines the frontend web application architecture for Colmeia. It 
 
 ## App Structure (React Router Conventions)
 
-Follow React Router framework mode conventions. Routes are defined in the `routes/` directory and drive file-based routing.
-High-level layout under `apps/web/src`:
+Follow React Router framework mode conventions. Routes are defined in the `app/routes/` directory and drive file-based routing.
+High-level layout under `apps/web`:
 
 ```
 apps/
   web/
-    src/
-      app/                 # app-wide setup (entry, providers)
-      routes/              # file-based route modules (React Router conventions)
-      modules/             # feature modules (mirrors API modules)
-      shared/              # reusable UI + utilities
-      assets/
-      main.tsx
+    app/                  # React Router app directory (entry, root, routes)
+      routes/             # file-based route modules (React Router conventions)
+      modules/            # feature modules (mirrors API modules)
+      shared/             # reusable UI + utilities
+      styles/
+    public/
 ```
 
 ### Modules (Feature-First)
@@ -41,7 +40,7 @@ apps/
 Each module owns its UI and feature components. Route files live in `routes/` per framework conventions and render a module `page`. Loaders/actions live in the route file by default; if they grow, they can be extracted into the module.
 
 ```
-apps/web/src/modules/<module-name>/
+apps/web/app/modules/<module-name>/
   pages/              # route-level pages (rendered by routes)
   components/         # module-local UI
   api.ts              # typed API client wrappers
@@ -139,13 +138,12 @@ Avoid client-global state unless necessary. If we need shared state later, prefe
 ```
 apps/
   web/
-    src/
-      app/
-        entry.client.tsx
-        entry.server.tsx
-        providers.tsx
+    app/
+      root.tsx
+      routes.ts
       routes/
         _index.tsx
+        app.layout.tsx
         app.general.tsx
         app.captain.tsx
         forms.$slug.tsx
@@ -160,7 +158,10 @@ apps/
       shared/
         ui/
         lib/
-      main.tsx
+      styles/
+        tailwind.css
+    react-router.config.ts
+    vite.config.ts
 packages/
   shared/
     src/
