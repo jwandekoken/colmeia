@@ -38,12 +38,11 @@ apps/
 
 ### Modules (Feature-First)
 
-Each module owns its UI, data access, and route helpers. Route files live in `routes/` per framework conventions, while modules export helpers consumed by routes:
+Each module owns its UI and feature components. Route files live in `routes/` per framework conventions and render a module `page`. Loaders/actions live in the route file by default; if they grow, they can be extracted into the module.
 
 ```
 apps/web/src/modules/<module-name>/
-  loaders.ts          # data loaders
-  actions.ts          # mutations
+  pages/              # route-level pages (rendered by routes)
   components/         # module-local UI
   api.ts              # typed API client wrappers
   schemas.ts          # module-local schemas (optional)
@@ -83,6 +82,8 @@ Use React Router v7 framework mode:
 - `action` functions for mutations.
 - Use `defer` for streaming large payloads (e.g., media lists).
 - Prefer `fetcher` for non-navigation mutations.
+- Default: `loader` and `action` live in the route file.
+- Extract to `modules/<module>/loaders.ts` or `modules/<module>/actions.ts` only when needed.
 
 SPA rendering config (React Router framework mode):
 
